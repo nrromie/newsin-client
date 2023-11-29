@@ -38,7 +38,7 @@ const UserStats = () => {
                     </div>
                 </div>
 
-                <div className="border-x-2 border-r-2 px-5 border-gray-300">
+                <div className="border-none md: border-x-2 lg:border-x-2 px-5 border-gray-300">
                     <div className="stat-title text-2xl">Normal Users</div>
                     <div className="stat-value text-9xl">
                         <CountUp end={userNums.totalUsers - userNums.premiumUsers} enableScrollSpy={true} />
