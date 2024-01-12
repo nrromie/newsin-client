@@ -40,7 +40,6 @@ const AddArticle = () => {
 
     const onSubmit = async (data) => {
         setSending(true)
-        // upload image to imgbb and then get an url
         const imageFile = { image: data.image[0] }
         console.log(imageFile)
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -50,7 +49,7 @@ const AddArticle = () => {
         });
         if (res.data.success) {
             try {
-                data.tags = selectedOption;
+                data.tags = selectedOption.map(sOp => sOp.label);
                 data.view = 0;
                 data.isApproved = false;
                 data.isPremium = false;

@@ -1,8 +1,8 @@
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer p-10 bg-slate-800">
+        <div className="bg-slate-800 p-10">
+            <footer className="footer w-11/12 mx-auto">
                 <aside>
                     <img src="/images/newsin.svg" alt="Logo" className="h-24 w-24" />
                     <p>Newsin<br />Providing reliable news since 1992</p>
@@ -16,7 +16,7 @@ const Footer = () => {
                     </div>
                 </nav>
             </footer>
-            <footer className="footer footer-center p-4 bg-slate-900">
+            <footer className="footer footer-center p-4 bg-slate-900 mt-4">
                 <aside>
                     <p>Copyright © {new Date().getFullYear()} - All right reserved by Newsin Ltd</p>
                 </aside>

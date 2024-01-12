@@ -59,17 +59,16 @@ const Signup = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8 bg-gray-900 p-8 rounded-md">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up for an account</h2>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Sign up for an account</h2>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-
                     <div className="-space-y-px">
                         <div>
                             <div className="mt-1 flex items-center space-x-4">
-                                <label htmlFor="photo">
+                                <label htmlFor="photo" className="text-white">
                                     Choose Photo
                                 </label>
                                 <input
@@ -85,17 +84,15 @@ const Signup = () => {
                             {errors.photo && <p className="text-red-500 text-sm mt-1">Profile Photo is required</p>}
                         </div>
                     </div>
-
-
                     <div className="rounded-md rounded-t shadow-sm -space-y-px">
                         <div>
-                            <label className="sr-only">Name</label>
+                            <label className="sr-only text-white">Name</label>
                             <input
                                 {...register("displayName", { required: true })}
                                 type="text"
                                 autoComplete="displayName"
                                 required
-                                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Name"
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1">Name is required</p>}
@@ -103,13 +100,13 @@ const Signup = () => {
                     </div>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
-                            <label className="sr-only">Email</label>
+                            <label className="sr-only text-white">Email</label>
                             <input
                                 {...register("email", { required: true })}
                                 type="email"
                                 autoComplete="name"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email"
                             />
                             {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
@@ -117,7 +114,7 @@ const Signup = () => {
                     </div>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
-                            <label className="sr-only">Password</label>
+                            <label className="sr-only text-white">Password</label>
                             <input
                                 {...register("password", {
                                     required: true,
@@ -127,7 +124,7 @@ const Signup = () => {
                                 })}
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-400 text-white rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="password"
                                 autoComplete="newpassword"
                             />
@@ -136,7 +133,6 @@ const Signup = () => {
                             {errors.password?.type === "pattern" && <p className="text-red-500 text-sm mt-1">Password must contain one uppercase, one number, and a special character.</p>}
                         </div>
                     </div>
-
                     <div>
                         <button
                             type="submit"
@@ -145,10 +141,11 @@ const Signup = () => {
                             Sign Up
                         </button>
                     </div>
-                    <p>Already a member? <Link to={"/login"}>Login</Link></p>
+                    <p className="text-white">Already a member? <Link to={"/login"} className="text-indigo-400 hover:underline">Login</Link></p>
                 </form>
             </div>
         </div>
+
     );
 };
 

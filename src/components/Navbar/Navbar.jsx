@@ -29,7 +29,7 @@ const Navbar = () => {
         </>}
     </>
 
-    console.log(userData)
+    
     return (
         <div className="bg-slate-800 w-full text-white shadow-md">
             <div className="navbar w-11/12 h-[10vh] mx-auto">
@@ -61,7 +61,7 @@ const Navbar = () => {
                             </div>
                             :
                             <div className="flex gap-6">
-                                <Link className="btn" to={'signup'}>Signup</Link>
+                                <Link className="btn hidden md:flex lg:flex" to={'signup'}>Signup</Link>
                                 <Link className="btn" to={'login'}>Login</Link>
                             </div>
                     }

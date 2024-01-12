@@ -44,7 +44,7 @@ const ArticleDetails = () => {
                 ))}
             </ul>
 
-            <p className="text-gray-100 text-justify">{longDescription}</p>
+            <p className="text-gray-100">{longDescription}</p>
 
             <div className="mt-4">
                 <p className="text-sm text-gray-500">Views: <span className='text-white'>{view}</span></p>

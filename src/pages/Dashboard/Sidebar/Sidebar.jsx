@@ -17,7 +17,7 @@ const Sidebar = () => {
                     <FaUsers />
                     <span className="ml-2">All Users</span>
                 </Link>
-                <Link to="/analytics" className="flex items-center text-white p-4 hover:bg-gray-700">
+                <Link to="adallarticles" className="flex items-center text-white p-4 hover:bg-gray-700">
                     <MdArticle />
                     <span className="ml-2">All Articles</span>
                 </Link>

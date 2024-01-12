@@ -5,6 +5,7 @@ import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useEffect, useState } from 'react';
 import Loading from '../../../components/Loading/Loading';
 import { Link } from 'react-router-dom';
+import useLoadUserData from '../../../hooks/useLoadUserData';
 
 const Trending = () => {
     const AutoplaySlider = withAutoplay(AwesomeSlider);
@@ -12,6 +13,9 @@ const Trending = () => {
     const axiosPublic = useAxiosPublic();
     const [loading, setLoading] = useState(true)
     const [articles, setArticles] = useState([])
+
+    const [userData] = useLoadUserData();
+
 
 
     useEffect(() => {
@@ -47,9 +51,15 @@ const Trending = () => {
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                             <h2 className="text-white text-xl md:text-2xl font-bold">{article.title}</h2>
                             <p className="text-gray-300">Published by {article.publisher}</p>
-                            <Link to={`article/${article._id}`} className="text-blue-500 hover:underline mt-2 block">
-                                Read More
-                            </Link>
+                            {
+                                article.isPremium && !userData?.isPremium && !userData ?
+                                    <div className='text-yellow-500'>buy premium to read more</div>
+                                    :
+                                    <Link to={`article/${article._id}`} className="text-blue-500 hover:underline mt-2 block">
+                                        Read More
+                                    </Link>
+                            }
+
                         </div>
                     </div>
                 ))}

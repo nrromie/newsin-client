@@ -15,6 +15,9 @@ import PrivateRoutes from "./PrivateRoutes";
 import Analytics from "../pages/Dashboard/Analytics/Analytics";
 import AllUser from "../pages/Dashboard/AllUsers/AllUser";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
+import MyArticles from "../pages/MyArticles/MyArticles";
+import AdAllArticles from "../pages/Dashboard/AdAllArticles/AdAllArticles";
+import AdminArticleDetails from "../pages/ArticleDetails/AdminArticleDetails/AdminArticleDetails";
 
 const router = createBrowserRouter([
     {
@@ -59,24 +62,36 @@ const router = createBrowserRouter([
                 element: <PrivateRoutes><PremiumArticles></PremiumArticles></PrivateRoutes>
             },
             {
+                path: "myarticles",
+                element: <PrivateRoutes><MyArticles /></PrivateRoutes>
+            },
+    {
+        path: "/dashboard",
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        children: [
+            {
                 path: "/dashboard",
-                element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
-                children: [
-                    {
-                        path: "/dashboard",
-                        element: <Analytics />
-                    },
-                    {
-                        path: "addpublisher",
-                        element: <AddPublisher />
-                    },
-                    {
-                        path: "alluser",
-                        element: <AllUser />
-                    }
-                ]
+                element: <Analytics />
+            },
+            {
+                path: "addpublisher",
+                element: <AddPublisher />
+            },
+            {
+                path: "alluser",
+                element: <AllUser />
+            },
+            {
+                path: "adallarticles",
+                element: <AdAllArticles />
+            },
+            {
+                path: "adminarticledetails/:articleId",
+                element: <AdminArticleDetails/>
             }
-        ],
+        ]
+    }
+],
     },
 ]);
 
