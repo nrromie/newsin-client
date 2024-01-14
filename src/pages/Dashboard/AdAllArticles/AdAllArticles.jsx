@@ -57,7 +57,7 @@ const AdAllArticles = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    {article.isApproved ? "true" : "false"}
+                                    {article.isApproved ? "Approved" : article.declineMessage ? "Declined" : "Pending"}
                                 </td>
                                 <td>{article.isPremium ? "true" : "false"}</td>
                                 <th>

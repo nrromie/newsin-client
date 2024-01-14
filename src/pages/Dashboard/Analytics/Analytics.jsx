@@ -26,13 +26,15 @@ const Analytics = () => {
     };
 
     return (
-        <Chart
-            chartType="PieChart"
-            data={data}
-            options={options}
-            width={"100%"}
-            height={"400px"}
-        />
+        <div>
+            <Chart
+                chartType="PieChart"
+                data={data}
+                options={options}
+                width={"100%"}
+                height={"400px"}
+            />
+        </div>
     );
 };
 

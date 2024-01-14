@@ -17,7 +17,8 @@ import AllUser from "../pages/Dashboard/AllUsers/AllUser";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import MyArticles from "../pages/MyArticles/MyArticles";
 import AdAllArticles from "../pages/Dashboard/AdAllArticles/AdAllArticles";
-import AdminArticleDetails from "../pages/ArticleDetails/AdminArticleDetails/AdminArticleDetails";
+import AdminArticleDetails from "../pages/Dashboard/AdAllArticles/AdminArticleDetails/AdminArticleDetails";
+import MyArticleDetails from "../pages/MyArticles/MyArticleDetails/MyArticleDetails";
 
 const router = createBrowserRouter([
     {
@@ -65,33 +66,37 @@ const router = createBrowserRouter([
                 path: "myarticles",
                 element: <PrivateRoutes><MyArticles /></PrivateRoutes>
             },
-    {
-        path: "/dashboard",
-        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
-        children: [
+            {
+                path: "myarticledetails/:articleId",
+                element: <PrivateRoutes><MyArticleDetails /></PrivateRoutes>
+            },
             {
                 path: "/dashboard",
-                element: <Analytics />
-            },
-            {
-                path: "addpublisher",
-                element: <AddPublisher />
-            },
-            {
-                path: "alluser",
-                element: <AllUser />
-            },
-            {
-                path: "adallarticles",
-                element: <AdAllArticles />
-            },
-            {
-                path: "adminarticledetails/:articleId",
-                element: <AdminArticleDetails/>
+                element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+                children: [
+                    {
+                        path: "/dashboard",
+                        element: <Analytics />
+                    },
+                    {
+                        path: "addpublisher",
+                        element: <AddPublisher />
+                    },
+                    {
+                        path: "alluser",
+                        element: <AllUser />
+                    },
+                    {
+                        path: "adallarticles",
+                        element: <AdAllArticles />
+                    },
+                    {
+                        path: "adminarticledetails/:articleId",
+                        element: <AdminArticleDetails />
+                    }
+                ]
             }
-        ]
-    }
-],
+        ],
     },
 ]);
 

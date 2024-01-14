@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
-import Loading from '../../../components/Loading/Loading';
+import useAxiosPublic from '../../../../hooks/useAxiosPublic';
+import Loading from '../../../../components/Loading/Loading';
 import { useParams } from 'react-router-dom';
 import { FaCheck } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
-const AdminArticleDetails = ({ match }) => {
+const AdminArticleDetails = () => {
     const axiosPublic = useAxiosPublic();
     const { articleId } = useParams();
     const [article, setArticle] = useState(null);
@@ -36,6 +37,38 @@ const AdminArticleDetails = ({ match }) => {
         } catch (error) {
             console.error('Error approving article:', error);
         }
+    };
+
+    const handleDecline = async () => {
+        Swal.fire({
+            title: "Decline message",
+            input: "textarea",
+            inputAttributes: {
+                autocapitalize: "off"
+            },
+            showCancelButton: true,
+            confirmButtonText: "Confirm Decline",
+            showLoaderOnConfirm: true,
+            preConfirm: async (declineMessage) => {
+                try {
+                    await axiosPublic.patch(`/decline-article/${articleId}`, {
+                        declineMessage
+                    });
+                } catch (error) {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Article Declined",
+                    text: "You can add additional information or actions here.",
+                    icon: "error"
+                });
+                fetchArticle()
+            }
+        });
     };
 
     const handleTogglePremium = async () => {
@@ -84,11 +117,17 @@ const AdminArticleDetails = ({ match }) => {
                     </button>
                 )}
 
-                <button onClick={handleTogglePremium} className={`btn ${article.isPremium ? 'btn-warning' : 'btn-secondary'}`}>
+                <button onClick={handleDecline} className="btn btn-danger">
+                    Decline
+                </button>
+
+                <button
+                    onClick={handleTogglePremium}
+                    className={`btn ${article.isPremium ? 'btn-warning' : 'btn-secondary'}`}
+                >
                     Toggle Premium {article.isPremium && <FaCheck className="ml-1" />}
                 </button>
             </div>
-
         </div>
     );
 };
