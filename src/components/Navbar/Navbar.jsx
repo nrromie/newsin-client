@@ -29,7 +29,9 @@ const Navbar = () => {
             <li><NavLink className={linkStyle} to={'addarticle'}>Add Article</NavLink></li>
             <li><NavLink className={linkStyle} to={'subscription'}>Subscription</NavLink></li>
             <li><NavLink className={linkStyle} to={'myarticles'}>My Articles</NavLink></li>
-            {userData?.isPremium && <li><NavLink className={premStyle} to={'premiumarticles'}>Premium Articles <FaCrown /></NavLink></li>}
+            {userData?.isPremium ? (
+                <li><NavLink className={premStyle} to={'premiumarticles'}>Premium Articles <FaCrown /></NavLink></li>
+            ) : null}
             {userData?.isAdmin && <li><NavLink className={linkStyle} to={'dashboard'}>Dashboard</NavLink></li>}
         </>}
     </>
@@ -86,7 +88,7 @@ const Navbar = () => {
                             }`}
                     >
                         <ul className="menu-vertical p-4">{navlinks}
-                        <li className="flex md:hidden lg:hidden"><button onClick={logOut}>Log out</button></li>
+                            <li className="flex md:hidden lg:hidden"><button onClick={logOut}>Log out</button></li>
                         </ul>
                     </div>
                 </div>
