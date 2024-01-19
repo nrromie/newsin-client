@@ -29,7 +29,7 @@ const Navbar = () => {
         </>}
     </>
 
-    
+
     return (
         <div className="bg-slate-800 w-full text-white shadow-md">
             <div className="navbar w-11/12 h-[10vh] mx-auto">
@@ -57,7 +57,9 @@ const Navbar = () => {
                         user ?
                             <div className="flex gap-6">
                                 <button onClick={logOut}>Log out</button>
-                                <img className="w-12 h-12 object-cover rounded-full" src={user?.photoURL} alt="User Photo" />
+                                <Link to={"/myprofile"}>
+                                    <img className="w-12 h-12 object-cover rounded-full" src={user?.photoURL} alt="User Photo" />
+                                </Link>
                             </div>
                             :
                             <div className="flex gap-6">

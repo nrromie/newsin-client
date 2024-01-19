@@ -19,6 +19,7 @@ import MyArticles from "../pages/MyArticles/MyArticles";
 import AdAllArticles from "../pages/Dashboard/AdAllArticles/AdAllArticles";
 import AdminArticleDetails from "../pages/Dashboard/AdAllArticles/AdminArticleDetails/AdminArticleDetails";
 import MyArticleDetails from "../pages/MyArticles/MyArticleDetails/MyArticleDetails";
+import MyProfile from "../pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: "myarticledetails/:articleId",
                 element: <PrivateRoutes><MyArticleDetails /></PrivateRoutes>
+            },
+            {
+                path: "myprofile",
+                element: <PrivateRoutes><MyProfile /></PrivateRoutes>
             },
             {
                 path: "/dashboard",
