@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const image_hosting_key = import.meta.env.VITE_IMG_HOST_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -13,6 +14,7 @@ const Signup = () => {
     const { createUser } = useContext(AuthContext)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic()
+    const location = useLocation()
     const navigate = useNavigate()
 
     const onSubmit = async (data) => {
@@ -50,7 +52,7 @@ const Signup = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                 });
-                                navigate('/');
+                                navigate(location?.state ? location.state : '/');
                             }
                         })
                         .catch(error => console.log(error))
@@ -141,8 +143,11 @@ const Signup = () => {
                             Sign Up
                         </button>
                     </div>
-                    <p className="text-white">Already a member? <Link to={"/login"} className="text-indigo-400 hover:underline">Login</Link></p>
                 </form>
+
+                <SocialLogin />
+
+                <p className="text-white">Already a member? <Link to={"/login"} className="text-indigo-400 hover:underline">Login</Link></p>
             </div>
         </div>
 

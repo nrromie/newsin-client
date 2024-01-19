@@ -29,7 +29,7 @@ const UserStats = () => {
 
     return (
         <div className='flex justify-center items-center py-10'>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 shadow">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 shadow text-center">
 
                 <div className="px-5">
                     <div className="stat-title text-2xl">Total Users</div>
@@ -38,7 +38,7 @@ const UserStats = () => {
                     </div>
                 </div>
 
-                <div className="border-x-2 border-r-2 px-5 border-gray-300">
+                <div className="border-0 lg:border-x-2 px-5 border-gray-300">
                     <div className="stat-title text-2xl">Normal Users</div>
                     <div className="stat-value text-9xl">
                         <CountUp end={userNums.totalUsers - userNums.premiumUsers} enableScrollSpy={true} />

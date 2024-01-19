@@ -4,6 +4,7 @@ import { AuthContext } from '../../../providers/AuthProvider';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import useLoadUserData from '../../../hooks/useLoadUserData';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Payment = () => {
 
@@ -11,7 +12,6 @@ const Payment = () => {
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit } = useForm({ mode: 'onChange' });
     const { user } = useContext(AuthContext)
-    const [fetchUser] = useLoadUserData()
     const plans = {
         1: { name: 'Starter', price: 0.99, time: "1 minute" },
         2: { name: 'Standard', price: 7, time: "5 days" },
@@ -22,8 +22,15 @@ const Payment = () => {
         const selectedPlan = plans[data.plan];
         axiosPublic.patch(`/subscribe/${user.email}/${selectedPlan.name}`)
             .then(res => {
-                console.log('Subscription successful', res);
-                fetchUser()
+                if (res.data.success) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Successfully Subscribe',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error subscribing user:', error);
@@ -47,8 +54,8 @@ const Payment = () => {
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
                         >
                             <option value={plansId}>
-                                    {plans[plansId].name} - ${plans[plansId].price.toFixed(2)} for {plans[plansId].time}
-                                </option>
+                                {plans[plansId].name} - ${plans[plansId].price.toFixed(2)} for {plans[plansId].time}
+                            </option>
                             {Object.keys(plans).map((planId) => (
                                 <option key={planId} value={planId}>
                                     {plans[planId].name} - ${plans[planId].price.toFixed(2)} for {plans[planId].time}

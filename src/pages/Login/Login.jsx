@@ -1,19 +1,21 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
 
     const { signin } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation()
     const navigate = useNavigate()
 
     const onSubmit = (data) => {
         signin(data.email, data.password)
             .then((res) => {
                 console.log('Login successful:', res);
-                navigate('/');
+                navigate(location?.state ? location.state : '/')
             })
             .catch((error) => {
                 console.error('Login error:', error);
@@ -71,8 +73,11 @@ const Login = () => {
                             Login
                         </button>
                     </div>
-                    <p className="text-white">Don't have an account? <Link to={"/signup"} className="text-indigo-400 hover:underline">Create one now</Link></p>
                 </form>
+
+                <SocialLogin />
+
+                <p className="text-white">Don't have an account? <Link to={"/signup"} className="text-indigo-400 hover:underline">Create one now</Link></p>
             </div>
         </div>
 

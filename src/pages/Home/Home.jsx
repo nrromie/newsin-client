@@ -1,4 +1,4 @@
-import Banner from "../../components/Banner/Banner";
+import Banner from "./Banner/Banner";
 import Trending from "./Trending/Trending"
 import Publishers from "./Publishers/Publishers";
 import UserStats from "./UserStats/UserStats";
