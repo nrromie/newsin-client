@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import useAxiosSecure from '../../hooks/useAxiosSecure'
 import Swal from 'sweetalert2';
 import Loading from '../../components/Loading/Loading';
 import Select from 'react-select';
@@ -11,6 +12,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const AddArticle = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);
@@ -41,7 +43,6 @@ const AddArticle = () => {
     const onSubmit = async (data) => {
         setSending(true)
         const imageFile = { image: data.image[0] }
-        console.log(imageFile)
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -55,7 +56,7 @@ const AddArticle = () => {
                 data.isPremium = false;
                 data.image = res.data.data.display_url
 
-                const response = await axiosPublic.post('/article', data);
+                const response = await axiosSecure.post('/article', data);
                 if (response.data.insertedId) {
                     reset();
                     setSending(false)
@@ -71,6 +72,9 @@ const AddArticle = () => {
                 console.error('Error submitting the form:', error);
                 setSending(false)
             }
+        }
+        else {
+            console.error("Error Uploading image")
         }
     };
 

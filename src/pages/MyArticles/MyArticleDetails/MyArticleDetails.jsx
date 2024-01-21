@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import Loading from '../../../components/Loading/Loading';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const MyArticleDetails = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { articleId } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const fetchArticle = async () => {
         try {
-            const response = await axiosPublic.get(`/articles/${articleId}`);
+            const response = await axiosSecure.get(`/articles/${articleId}`);
             setArticle(response.data);
             setLoading(false);
         } catch (error) {
@@ -24,7 +24,7 @@ const MyArticleDetails = () => {
 
     useEffect(() => {
         fetchArticle();
-    }, [axiosPublic, articleId]);
+    }, [axiosSecure, articleId]);
 
     const handleUpdate = () => {
 

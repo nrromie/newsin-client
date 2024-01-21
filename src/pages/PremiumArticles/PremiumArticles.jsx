@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import Loading from "../../components/Loading/Loading";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PremiumArticles = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { isPending, error, data: articles } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            axiosPublic.get('/premium-articles').then((res) => res.data),
+            axiosSecure.get('/premium-articles').then((res) => res.data),
     });
 
 

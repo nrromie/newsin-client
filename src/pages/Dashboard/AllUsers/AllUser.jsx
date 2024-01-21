@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Loading from "../../../components/Loading/Loading";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllUser = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [loading, setLoading] = useState(true)
     const [users, setUsers] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axiosPublic.get('/users');
+                const response = await axiosSecure.get('/users');
                 setUsers(response.data);
                 setLoading(false)
             } catch (error) {
@@ -21,7 +22,7 @@ const AllUser = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>
+        return <Loading />
     }
 
     return (

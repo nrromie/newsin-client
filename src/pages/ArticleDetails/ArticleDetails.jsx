@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Loading from '../../components/Loading/Loading';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const ArticleDetails = () => {
     const { articleId } = useParams();
     const [loading, setLoading] = useState(true)
     const [article, setArticle] = useState(null);
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const response = await axiosPublic.get(`/articles/${articleId}`);
+                const response = await axiosSecure.get(`/articles/${articleId}`);
                 setArticle(response.data);
                 setLoading(false)
             } catch (error) {

@@ -1,18 +1,18 @@
 import { useContext } from "react";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyArticles = () => {
     const { user } = useContext(AuthContext)
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const { isPending, error, data: articles } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            axiosPublic.get(`/myarticles/${user.email}`).then((res) => res.data),
+            axiosSecure.get(`/myarticles/${user.email}`).then((res) => res.data),
     });
 
     if (isPending) return <Loading />;

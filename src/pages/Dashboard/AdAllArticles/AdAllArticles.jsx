@@ -1,18 +1,18 @@
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../../components/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdAllArticles = () => {
 
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure()
     const [currentPage, setCurrentPage] = useState(1);
 
     const { isPending, error, data } = useQuery({
         queryKey: ['repoData', currentPage],
         queryFn: () =>
-            axiosPublic.get(`/adminallarticles?page=${currentPage}`).then((res) => res.data),
+            axiosSecure.get(`/adminallarticles?page=${currentPage}`).then((res) => res.data),
     });
 
     const handlePageChange = (newPage) => {

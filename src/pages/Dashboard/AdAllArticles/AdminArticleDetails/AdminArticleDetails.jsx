@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
-import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import Loading from '../../../../components/Loading/Loading';
 import { useParams } from 'react-router-dom';
 import { FaCheck } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const AdminArticleDetails = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { articleId } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const fetchArticle = async () => {
         try {
-            const response = await axiosPublic.get(`/articles/${articleId}`);
+            const response = await axiosSecure.get(`/articles/${articleId}`);
             setArticle(response.data);
             setLoading(false);
         } catch (error) {
@@ -24,12 +24,12 @@ const AdminArticleDetails = () => {
 
     useEffect(() => {
         fetchArticle();
-    }, [axiosPublic, articleId]);
+    }, [axiosSecure, articleId]);
 
 
     const handleApprove = async () => {
         try {
-            const res = await axiosPublic.patch(`/approve-article/${articleId}`);
+            const res = await axiosSecure.patch(`/approve-article/${articleId}`);
 
             if (res.data.success) {
                 fetchArticle()
@@ -51,7 +51,7 @@ const AdminArticleDetails = () => {
             showLoaderOnConfirm: true,
             preConfirm: async (declineMessage) => {
                 try {
-                    await axiosPublic.patch(`/decline-article/${articleId}`, {
+                    await axiosSecure.patch(`/decline-article/${articleId}`, {
                         declineMessage
                     });
                 } catch (error) {
@@ -73,7 +73,7 @@ const AdminArticleDetails = () => {
 
     const handleTogglePremium = async () => {
         try {
-            const res = await axiosPublic.patch(`/toggle-premium/${articleId}`);
+            const res = await axiosSecure.patch(`/toggle-premium/${articleId}`);
             console.log(res)
             if (res.data.success) {
                 fetchArticle()
