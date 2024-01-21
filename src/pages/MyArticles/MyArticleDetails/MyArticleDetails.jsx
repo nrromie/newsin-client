@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Loading from '../../../components/Loading/Loading';
@@ -10,6 +10,7 @@ const MyArticleDetails = () => {
     const { articleId } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const fetchArticle = async () => {
         try {
@@ -26,10 +27,6 @@ const MyArticleDetails = () => {
         fetchArticle();
     }, [axiosSecure, articleId]);
 
-    const handleUpdate = () => {
-
-    };
-
     const handleDelete = async () => {
         // Show a confirmation dialog before deleting
         const confirmDelete = await Swal.fire({
@@ -45,8 +42,9 @@ const MyArticleDetails = () => {
         if (confirmDelete.isConfirmed) {
             // Delete the article
             try {
-                await axiosPublic.delete(`/articles/${articleId}`);
+                await axiosSecure.delete(`/articles/${articleId}`);
                 Swal.fire('Deleted!', 'Your article has been deleted.', 'success');
+                navigate('/myarticles')
 
             } catch (error) {
                 console.error('Error deleting article:', error);
@@ -106,9 +104,9 @@ const MyArticleDetails = () => {
             )}
 
             <div className="flex items-center space-x-4">
-                <button onClick={handleUpdate} className="btn btn-primary" title="Update">
+                <Link to={`/myarticles/update/${article._id}`} className="btn btn-primary" title="Update">
                     <FaEdit />
-                </button>
+                </Link>
                 <button onClick={handleDelete} className="btn btn-danger" title="Delete">
                     <FaTrash />
                 </button>

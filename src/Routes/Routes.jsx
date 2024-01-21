@@ -20,6 +20,7 @@ import AdAllArticles from "../pages/Dashboard/AdAllArticles/AdAllArticles";
 import AdminArticleDetails from "../pages/Dashboard/AdAllArticles/AdminArticleDetails/AdminArticleDetails";
 import MyArticleDetails from "../pages/MyArticles/MyArticleDetails/MyArticleDetails";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import UpdateArticle from "../pages/MyArticles/UpdateArticle/UpdateArticle"
 
 const router = createBrowserRouter([
     {
@@ -65,7 +66,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "myarticles",
-                element: <PrivateRoutes><MyArticles /></PrivateRoutes>
+                element: <PrivateRoutes><MyArticles /></PrivateRoutes>,
+            },
+            {
+                path: "myarticles/update/:id",
+                element: <PrivateRoutes><UpdateArticle /></PrivateRoutes>,
             },
             {
                 path: "myarticledetails/:articleId",

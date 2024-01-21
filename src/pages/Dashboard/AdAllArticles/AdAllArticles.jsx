@@ -10,7 +10,7 @@ const AdAllArticles = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', currentPage],
+        queryKey: ['adallarticlespage', currentPage],
         queryFn: () =>
             axiosSecure.get(`/adminallarticles?page=${currentPage}`).then((res) => res.data),
     });

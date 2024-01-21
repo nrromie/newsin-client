@@ -41,11 +41,11 @@ const AuthProvider = ({ children }) => {
             const loggedUser = { email: currentUser?.email || user?.email };
             if (currentUser) {
                 axiosPublic.post("/jwt", loggedUser, { withCredentials: true })
-                    .then(res => console.log(res.data))
+                    .then(res => { })
             }
             else {
                 axiosPublic.post("/logout", loggedUser, { withCredentials: true })
-                    .then(res => console.log(res.data))
+                    .then(res => { })
             }
         })
         return () => {
